@@ -4,23 +4,22 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import PySimpleGUI as sg
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from pandas.plotting import register_matplotlib_converters
-from pyspark.sql import DataFrame as SparkDataFrame
-from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
-
-from n1analysis.binary_classification.classification_utils import (
+from binary_classification.classification_utils import (
     calculate_classification_types,
     calculate_classification_types_spark,
     get_classification_data_by_type,
     get_classification_data_by_type_spark,
 )
-from n1analysis.binary_classification.plot_auc import (
+from binary_classification.plot_auc import (
     calculate_precision_recall,
     calculate_precision_recall_spark,
 )
-from n1analysis.binary_classification.plot_transaction import plot_payment_history
+from binary_classification.plot_transaction import plot_payment_history
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from pandas.plotting import register_matplotlib_converters
+from pyspark.sql import DataFrame as SparkDataFrame
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
 
 register_matplotlib_converters()
 

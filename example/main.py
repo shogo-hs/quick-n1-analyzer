@@ -1,11 +1,8 @@
 from datetime import datetime, timedelta
 
 import pandas as pd
-
-from n1analysis.binary_classification.misclassification_analysis import (
-    MisClassifiedInspector,
-)
-from n1analysis.datasets.payment_transaction import generate_transaction_data
+from binary_classification.misclassification_analysis import MisClassifiedInspector
+from datasets.payment_transaction import generate_transaction_data
 
 if __name__ == "__main__":
     df_normal = generate_transaction_data(
