@@ -91,7 +91,9 @@ class MisClassifiedInspector:
             )
         self.columns = list(self.dataset.columns)  # 更新
 
-    def get_misclassified_data_by_type(self, type: str):
+    def get_misclassified_data_by_type(
+        self, type: str
+    ) -> Union[pd.DataFrame, SparkDataFrame]:
         if self.spark is None:
             return get_classification_data_by_type(
                 self.misclassified_data, "classification_type", type
@@ -102,7 +104,7 @@ class MisClassifiedInspector:
                 self.misclassified_data, "classification_type", "FP"
             )
 
-    def select_user_data(self, user_id: str, df: pd.DataFrame) -> pd.DataFrame:
+    def get_selected_user_data(self, user_id: str, df: pd.DataFrame) -> pd.DataFrame:
         """
         特定のユーザーIDに該当するデータを返す。
 
@@ -407,7 +409,9 @@ class MisClassifiedInspector:
                 window["user_id"].update(values=user_ids)
 
             if event == "Display" and values["user_id"]:
-                self.user_data = self.select_user_data(values["user_id"], self.dataset)
+                self.user_data = self.get_selected_user_data(
+                    values["user_id"], self.dataset
+                )
                 if not self.user_data.empty:
                     row_colors = [
                         (index, "red")
@@ -426,7 +430,7 @@ class MisClassifiedInspector:
 
             if event == "Plot History":
                 selected_user_id = values["user_id"]
-                selected_user_data = self.select_user_data(
+                selected_user_data = self.get_selected_user_data(
                     selected_user_id, self.dataset
                 )
 
